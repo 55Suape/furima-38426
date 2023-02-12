@@ -29,3 +29,5 @@
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+# 変更履歴を記録する隠しファイル.Ds_Storeは不要のため削除
+.Ds_Store
