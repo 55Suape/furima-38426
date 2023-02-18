@@ -1,14 +1,15 @@
 class Item < ApplicationRecord
-  validates :image,presence: true
-  validates :item_name,presence: true
+  validates :image, presence: true
+  validates :item_name, presence: true
   validates :spec, presence: true
-  validates :category_id, numericality: { other_than: 1 , message: "can't be blank" }
-  validates :condition_id, numericality: { other_than: 1 , message: "can't be blank" }
-  validates :postage_id, numericality: { other_than: 1 , message: "can't be blank" }
-  validates :prefecture_id, numericality: { other_than: 1 , message: "can't be blank" }
-  validates :schedule_id, numericality: { other_than: 1 , message: "can't be blank" }
-  with_options presence: true, inclusion: { in: 300..9_999_999 }, format: { with: /\A[0-9]+\z/ } do
-    validates :price, numericality: true
+  validates :category_id, numericality: { other_than: 1, message: "can't be blank" }
+  validates :condition_id, numericality: { other_than: 1, message: "can't be blank" }
+  validates :postage_id, numericality: { other_than: 1, message: "can't be blank" }
+  validates :prefecture_id, numericality: { other_than: 1, message: "can't be blank" }
+  validates :schedule_id, numericality: { other_than: 1, message: "can't be blank" }
+  with_options presence: true do
+    validates :price, numericality: true, inclusion: { in: 300..9_999_999, allow_blank: true },
+                      format: { with: /\A[0-9]+\z/, allow_blank: true }
   end
 
   belongs_to :user
@@ -19,5 +20,4 @@ class Item < ApplicationRecord
   belongs_to :prefecture
   belongs_to :schedule
   has_one_attached :image
-
 end
