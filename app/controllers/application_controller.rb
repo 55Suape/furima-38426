@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::Base
-  before_action :authenticate_user!, except: [:index] # indexアクションの場合を除き、ログインしていないユーザーはログイン画面へ促す
   before_action :basic_auth
   before_action :configure_permitted_parameters, if: :devise_controller?
 

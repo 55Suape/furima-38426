@@ -1,4 +1,5 @@
 class ItemsController < ApplicationController
+  before_action :authenticate_user!, except: [:index] # indexアクションの場合を除き、ログインしていないユーザーはログイン画面へ促す
   def index
   end
 
