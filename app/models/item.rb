@@ -8,8 +8,7 @@ class Item < ApplicationRecord
   validates :prefecture_id, numericality: { other_than: 1, message: "can't be blank" }
   validates :schedule_id, numericality: { other_than: 1, message: "can't be blank" }
   with_options presence: true do
-    validates :price, numericality: true, inclusion: { in: 300..9_999_999, allow_blank: true },
-                      format: { with: /\A[0-9]+\z/, allow_blank: true }
+    validates :price, numericality: { only_integer: true }, inclusion: { in: 300..9_999_999, allow_blank: true }
   end
 
   belongs_to :user
