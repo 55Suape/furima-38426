@@ -22,9 +22,9 @@ class ItemsController < ApplicationController
   def show
   end
 
-  # 出品ユーザー ≠ カレントユーザー の場合はトップページへ遷移、イコールの場合は編集画面へ遷移
+  # 出品ユーザー = カレントユーザー且つSold Outになっていない場合は編集画面へ遷移、それ以外はトップページへ遷移
   def edit
-    if @item.user == current_user
+    if @item.user == current_user && @item.order.nil?
       render 'edit'
     else
       redirect_to root_path

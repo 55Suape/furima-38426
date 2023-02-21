@@ -120,7 +120,7 @@
   <%# /FURIMAの特徴 %>
 
   <%# 商品一覧 %>
-  <div class='item-contents'>
+  <div class='item-contents' id="pickup-ancor" >
     <h2 class='title'>ピックアップカテゴリー</h2>
     <div class="subtitle" >
       新規投稿商品
@@ -133,11 +133,11 @@
             <%= link_to item_path(item.id) do %>
               <div class='item-img-content'>
                 <%= image_tag item.image, class: "item-img" %>
-                <%# 商品が売れていればsold outを表示しましょう %>
-                <%# <div class='sold-out'>
+                <% if item.order != nil %><%# /商品が売れた場合sold outを表示 %>
+                 <div class='sold-out'>
                   <span>Sold Out!!</span>
-                </div> %>
-                <%# //商品が売れていればsold outを表示しましょう %>
+                </div>
+                <% end %>
               </div>
               <div class='item-info'>
                 <h3 class='item-name'>
