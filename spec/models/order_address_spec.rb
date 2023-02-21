@@ -5,7 +5,7 @@ RSpec.describe OrderAddress, type: :model do
     @order_address = FactoryBot.build(:order_address)
   end
 
-  describe '商品購入' do   
+  describe '商品購入' do
     context '内容に問題ない場合' do
       it '全値が正しく入力されていれば購入できる' do
         expect(@order_address).to be_valid
@@ -24,7 +24,7 @@ RSpec.describe OrderAddress, type: :model do
       it 'post_codeは３桁ハイフン４桁の半角英数字でないと購入できない' do
         @order_address.post_code = '123ー123４'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include("Post code is invalid. Include hyphen(-)")
+        expect(@order_address.errors.full_messages).to include('Post code is invalid. Include hyphen(-)')
       end
       it 'prefecture_idが1では購入できない' do
         @order_address.prefecture_id = '1'
@@ -49,19 +49,19 @@ RSpec.describe OrderAddress, type: :model do
       it 'phone_numberが9桁以下では購入できない' do
         @order_address.phone_number = '080123456'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include("Phone number is invalid")
+        expect(@order_address.errors.full_messages).to include('Phone number is invalid')
       end
       it 'phone_numberが12桁以上では購入できない' do
         @order_address.phone_number = '080123456789'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include("Phone number is invalid")
+        expect(@order_address.errors.full_messages).to include('Phone number is invalid')
       end
       it 'phone_numberは半角数値でないと購入できない' do
         @order_address.phone_number = '０８０1234123４'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include("Phone number is invalid")
+        expect(@order_address.errors.full_messages).to include('Phone number is invalid')
       end
-      it "tokenが空では購入できない" do
+      it 'tokenが空では購入できない' do
         @order_address.token = nil
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Token can't be blank")
