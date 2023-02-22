@@ -4,6 +4,7 @@ FactoryBot.define do
     prefecture_id { 2 }
     city          { '盛岡市' }
     house_number  { '1-1-1' }
+    building_name { 'はなまるハイツ' }
     phone_number  { '09000000000' }
     token         { 'tok_abcdefghijk00000000000000000' }
   end

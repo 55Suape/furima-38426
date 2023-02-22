@@ -6,7 +6,6 @@ RSpec.describe OrderAddress, type: :model do
     user = FactoryBot.create(:user)
     # ダミーイメージを保存済みのitem情報を作り、item_idに渡す
     item = FactoryBot.build(:item)
-    item.image = fixture_file_upload('public/images/test_image.png')
     item.save
     @order_address = FactoryBot.build(:order_address, user_id: user.id, item_id: item.id)
   end
@@ -29,6 +28,11 @@ RSpec.describe OrderAddress, type: :model do
       end
       it 'post_codeは３桁ハイフン４桁の半角英数字でないと購入できない' do
         @order_address.post_code = '123ー123４'
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include('Post code is invalid. Include hyphen(-)')
+      end
+      it 'post_codeはハイフンがなければ購入できない' do
+        @order_address.post_code = '1231234'
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include('Post code is invalid. Include hyphen(-)')
       end
