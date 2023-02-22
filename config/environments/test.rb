@@ -45,4 +45,7 @@ Rails.application.configure do
 
   # Raises error for missing translations.
   # config.action_view.raise_on_missing_translations = true
+
+  #購入機能のFormオブジェクトモデル単体テストでMySQL client is not connectedエラーが出たため以下追記
+  config.active_job.queue_adapter = :inline 
 end

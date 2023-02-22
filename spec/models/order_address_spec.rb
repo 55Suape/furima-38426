@@ -2,7 +2,13 @@ require 'rails_helper'
 
 RSpec.describe OrderAddress, type: :model do
   before do
-    @order_address = FactoryBot.build(:order_address)
+    # user情報を作り、user_idに渡す
+    user = FactoryBot.create(:user)
+    # ダミーイメージを保存済みのitem情報を作り、item_idに渡す
+    item = FactoryBot.build(:item)
+    item.image = fixture_file_upload('public/images/test_image.png')
+    item.save
+    @order_address = FactoryBot.build(:order_address, user_id: user.id, item_id: item.id)
   end
 
   describe '商品購入' do
@@ -65,6 +71,16 @@ RSpec.describe OrderAddress, type: :model do
         @order_address.token = nil
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Token can't be blank")
+      end
+      it 'userが紐付いていないと購入できない' do
+        @order_address.user_id = nil
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("User can't be blank")
+      end
+      it 'itemが紐付いていないと購入できない' do
+        @order_address.item_id = nil
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("Item can't be blank")
       end
     end
   end
