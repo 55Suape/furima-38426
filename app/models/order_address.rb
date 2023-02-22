@@ -10,7 +10,7 @@ class OrderAddress
     validates :city, format: { with: /\A[ぁ-んァ-ン一-龥]/, message: 'is invalid. Input full-width characters.' }
     validates :house_number
     VALID_PHONE_REGEX = /\A\d{10}$|^\d{11}\z/
-    validates :phone_number, presence: true, format: { with: VALID_PHONE_REGEX }
+    validates :phone_number, format: { with: VALID_PHONE_REGEX }
   end
   validates :prefecture_id, numericality: { other_than: 1, message: "can't be blank" }
 
