@@ -19,4 +19,5 @@ class Item < ApplicationRecord
   belongs_to :prefecture
   belongs_to :schedule
   has_one_attached :image
+  has_one :order
 end
